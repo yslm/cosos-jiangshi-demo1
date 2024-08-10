@@ -1,6 +1,7 @@
 import { _decorator, CCInteger, Component, Node, Sprite } from 'cc';
-import { CardStateEnum } from './types/Enums';
+import { CardStateEnum, PlantTypeEnum } from './types/Enums';
 import { SunManager } from './manamger/SunManager';
+import { MouseManager } from './manamger/MouseManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('Card')
@@ -18,6 +19,9 @@ export class Card extends Component {
     cdTime: number = 2
     @property({ type: CCInteger, tooltip: '卡片阳光数量' })
     needSunNum: number = 50
+
+    @property({ type: PlantTypeEnum })
+    plantType: PlantTypeEnum
 
     private cardState: CardStateEnum = CardStateEnum.cooling
 
@@ -95,6 +99,14 @@ export class Card extends Component {
     onClick() {
         console.log("onClick");
         //todo,需要减去阳光，并且重新进入冷却状态
+        if (this.needSunNum > SunManager.Instance.sunNum) {
+            return
+        }
+        //种植植物
+        let flag = MouseManager.Instance.addPlant(this.plantType)
+        if (!flag) {
+            return
+        }
         SunManager.Instance.subSunNum(this.needSunNum)
         this.transform2Cooling()
         //所有的card都需要检测状态

@@ -601,6 +601,7 @@
     },
     "cdTime": 2,
     "needSunNum": 150,
+    "plantType": 0,
     "_id": ""
   },
   {

@@ -34,6 +34,9 @@ export class SunManager extends Component {
     subSunNum(value: number) {
         console.log('subSunNum', value);
         this.sunPointNum -= value
+        if (this.sunPointNum <= 0) {
+            this.sunPointNum = 0
+        }
         this.updateSunPointLabel()
 
     }

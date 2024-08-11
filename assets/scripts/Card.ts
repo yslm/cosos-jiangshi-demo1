@@ -1,7 +1,8 @@
-import { _decorator, CCInteger, Component, Node, Sprite } from 'cc';
+import { _decorator, CCInteger, Component, Enum, EventMouse, Node, Sprite } from 'cc';
 import { CardStateEnum, PlantTypeEnum } from './types/Enums';
 import { SunManager } from './manamger/SunManager';
 import { MouseManager } from './manamger/MouseManager';
+import { Plant } from './Plant';
 const { ccclass, property } = _decorator;
 
 @ccclass('Card')
@@ -20,7 +21,7 @@ export class Card extends Component {
     @property({ type: CCInteger, tooltip: '卡片阳光数量' })
     needSunNum: number = 50
 
-    @property({ type: PlantTypeEnum })
+    @property({ type: Enum(PlantTypeEnum) })
     plantType: PlantTypeEnum
 
     private cardState: CardStateEnum = CardStateEnum.cooling
@@ -96,14 +97,14 @@ export class Card extends Component {
         this.cardLight.active = false
         this.cardGray.active = true
     }
-    onClick() {
+    onClick(e: EventMouse) {
         console.log("onClick");
         //todo,需要减去阳光，并且重新进入冷却状态
         if (this.needSunNum > SunManager.Instance.sunNum) {
             return
         }
         //种植植物
-        let flag = MouseManager.Instance.addPlant(this.plantType)
+        let flag = MouseManager.Instance.addPlant(this.plantType, e)
         if (!flag) {
             return
         }
@@ -114,5 +115,6 @@ export class Card extends Component {
 
     }
 }
+
 
 

@@ -1,4 +1,4 @@
-import { _decorator, Component, Enum, Node } from 'cc';
+import { _decorator, Animation, Component, Enum, Node } from 'cc';
 const { ccclass, property } = _decorator;
 import { PlantStateEnum, PlantTypeEnum } from './types/Enums';
 
@@ -12,7 +12,8 @@ export class Plant extends Component {
     coolingTime: number = 0;
 
     start() {
-
+        // this.plantState = PlantStateEnum.Disable
+        this.transform2Disable()
     }
 
     update(deltaTime: number) {
@@ -34,6 +35,18 @@ export class Plant extends Component {
     }
     disableUpdate() {
         // throw new Error('Method not implemented.');
+    }
+    transform2Enable() {
+        this.plantState = PlantStateEnum.Enable
+        this.node.getComponent(Animation).enabled = true
+    }
+    transform2Disable() {
+        this.plantState = PlantStateEnum.Disable
+        this.node.getComponent(Animation).enabled = false
+    }
+    SunBorn(arg: number) {
+        console.log('SunBorn====>', arg);
+
     }
 }
 

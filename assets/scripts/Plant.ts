@@ -1,30 +1,29 @@
-import { _decorator, Animation, Component, Enum, Node } from 'cc';
+import { _decorator, animation, Component, Enum } from "cc";
 const { ccclass, property } = _decorator;
-import { PlantStateEnum, PlantTypeEnum } from './types/Enums';
+import { PlantStateEnum, PlantTypeEnum } from "./types/Enums";
 
 //所有植物的基类
 
-@ccclass('Plant')
+@ccclass("Plant")
 export class Plant extends Component {
     private plantState: PlantStateEnum = PlantStateEnum.Disable;
-    @property({ type: Enum(PlantTypeEnum), tooltip: '植物种类' })
+    @property({ type: Enum(PlantTypeEnum), tooltip: "植物种类" })
     plantType: PlantTypeEnum;
     coolingTime: number = 0;
 
     start() {
         // this.plantState = PlantStateEnum.Disable
-        this.transform2Disable()
+        this.transform2Disable();
     }
 
     update(deltaTime: number) {
         switch (this.plantState) {
             case PlantStateEnum.Disable:
-                this.disableUpdate()
+                this.disableUpdate();
                 break;
             case PlantStateEnum.Enable:
-                this.enableUpdate()
+                this.enableUpdate();
                 break;
-
 
             default:
                 break;
@@ -37,17 +36,11 @@ export class Plant extends Component {
         // throw new Error('Method not implemented.');
     }
     transform2Enable() {
-        this.plantState = PlantStateEnum.Enable
-        this.node.getComponent(Animation).enabled = true
+        this.plantState = PlantStateEnum.Enable;
+        this.node.getComponent(animation.AnimationController).enabled = true;
     }
     transform2Disable() {
-        this.plantState = PlantStateEnum.Disable
-        this.node.getComponent(Animation).enabled = false
-    }
-    SunBorn(arg: number) {
-        console.log('SunBorn====>', arg);
-
+        this.plantState = PlantStateEnum.Disable;
+        this.node.getComponent(animation.AnimationController).enabled = false;
     }
 }
-
-

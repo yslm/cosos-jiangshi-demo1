@@ -1,9 +1,11 @@
-import { _decorator, animation, CCFloat, Component, Node } from "cc";
+import { _decorator, animation, CCFloat, Component, find, instantiate, Node, Prefab } from "cc";
 import { Plant } from "./Plant";
 const { ccclass, property } = _decorator;
 
 @ccclass("SunFlower")
 export class SunFlower extends Plant {
+    @property(Prefab)
+    subPrefab: Prefab;
     @property(CCFloat)
     produceDuration: number = 0;
 
@@ -27,7 +29,10 @@ export class SunFlower extends Plant {
         }
     }
 
-    SunBorn(arg: number) {
+    SunBorn(arg) {
         console.log("SunBorn====>", arg);
+        let sunNode = instantiate(this.subPrefab);
+        sunNode.parent = find("Canvas/ForeGround");
+        sunNode.setPosition(this.node.position);
     }
 }

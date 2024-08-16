@@ -15,7 +15,7 @@
     ],
     "_variables": {
       "isGrowing": {
-        "__id__": 30
+        "__id__": 29
       }
     }
   },
@@ -197,7 +197,7 @@
         "__id__": 22
       },
       {
-        "__id__": 27
+        "__id__": 26
       }
     ],
     "_entryState": {
@@ -326,24 +326,16 @@
     "destinationStart": 0,
     "relativeDestinationStart": false,
     "startEventBinding": {
-      "__id__": 25
+      "__id__": 24
     },
     "endEventBinding": {
-      "__id__": 26
+      "__id__": 25
     },
     "duration": 0.3
   },
   {
-    "__type__": "cc.animation.UnaryCondition",
-    "operator": 0,
-    "operand": {
-      "__id__": 24
-    }
-  },
-  {
-    "__type__": "cc.animation.BindableBoolean",
-    "variable": "isGrowing",
-    "value": false
+    "__type__": "cc.animation.TriggerCondition",
+    "trigger": "isGrowing"
   },
   {
     "__type__": "cc.animation.AnimationGraphEventBinding",
@@ -366,10 +358,10 @@
     "destinationStart": 0,
     "relativeDestinationStart": false,
     "startEventBinding": {
-      "__id__": 28
+      "__id__": 27
     },
     "endEventBinding": {
-      "__id__": 29
+      "__id__": 28
     },
     "duration": 0.3,
     "relativeDuration": false,
@@ -385,8 +377,7 @@
     "methodName": ""
   },
   {
-    "__type__": "cc.animation.PlainVariable",
-    "_type": 1,
-    "_value": false
+    "__type__": "cc.animation.TriggerVariable",
+    "_flags": 0
   }
 ]

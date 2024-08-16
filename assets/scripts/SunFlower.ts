@@ -1,5 +1,6 @@
 import { _decorator, animation, CCFloat, Component, find, instantiate, Node, Prefab } from "cc";
 import { Plant } from "./Plant";
+import { Sun } from "./Sun";
 const { ccclass, property } = _decorator;
 
 @ccclass("SunFlower")
@@ -34,5 +35,6 @@ export class SunFlower extends Plant {
         let sunNode = instantiate(this.subPrefab);
         sunNode.parent = find("Canvas/ForeGround");
         sunNode.setPosition(this.node.position);
+        sunNode.getComponent(Sun).jumpTo();
     }
 }

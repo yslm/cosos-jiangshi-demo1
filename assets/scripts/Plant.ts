@@ -1,4 +1,4 @@
-import { _decorator, animation, Component, Enum } from "cc";
+import { _decorator, Animation, animation, Component, Enum } from "cc";
 const { ccclass, property } = _decorator;
 import { PlantStateEnum, PlantTypeEnum } from "./types/Enums";
 
@@ -37,10 +37,19 @@ export class Plant extends Component {
     }
     transform2Enable() {
         this.plantState = PlantStateEnum.Enable;
-        this.node.getComponent(animation.AnimationController).enabled = true;
+        if (this.node.getComponent(animation.AnimationController)) {
+            this.node.getComponent(animation.AnimationController).enabled = true;
+        } else if (this.node.getComponent(Animation)) {
+            this.node.getComponent(Animation).enabled = true;
+        }
     }
     transform2Disable() {
         this.plantState = PlantStateEnum.Disable;
-        this.node.getComponent(animation.AnimationController).enabled = false;
+        // this.node.getComponent(animation.AnimationController).enabled = false;
+        if (this.node.getComponent(animation.AnimationController)) {
+            this.node.getComponent(animation.AnimationController).enabled = false;
+        } else if (this.node.getComponent(Animation)) {
+            this.node.getComponent(Animation).enabled = false;
+        }
     }
 }
